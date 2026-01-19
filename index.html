@@ -6,19 +6,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
-    /* Ta bort all marginal och fyll hela skärmen */
     html, body {
       margin: 0;
       height: 100%;
       width: 100%;
-      overflow: hidden;
       background: #000;
+      display: flex;
+      flex-direction: column;
     }
 
     iframe {
       width: 100%;
-      height: 100%;
+      height: calc(100% - 50px); /* Leave space for the text */
       border: none;
+    }
+
+    .footer-text {
+      height: 50px;
+      color: white;
+      text-align: center;
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   </style>
 </head>
@@ -28,6 +38,9 @@
     src="https://avgång.nu/Default?name=Studieg%C3%A5ngen&county=G%C3%B6teborg&maxdist=525&provider=Vasttrafik&uniquetrips=on"
     loading="eager">
   </iframe>
+
+  <div class="footer-text">Hej Agnes</div>
 </body>
 </html>
+
 
