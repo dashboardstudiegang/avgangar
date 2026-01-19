@@ -6,28 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
-    body {
+    /* Ta bort all marginal och fyll hela skärmen */
+    html, body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #000;
-      overflow: hidden;
-    }
-
-    h1 {
-      font-size: 50px;
-      padding: 30px;
-      margin: 0;
-      background: #006aa7;
-      color: white;
-      text-align: center;
-      height: 20px;
-      line-height: 20px;
-    }
-
-    .container {
-      position: relative;
+      height: 100%;
       width: 100%;
-      height: calc(100vh - 40px);
+      overflow: hidden;
       background: #000;
     }
 
@@ -36,99 +20,14 @@
       height: 100%;
       border: none;
     }
-
-    /* Täcker datum + väder högst upp */
-    .mask-top {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 10px;
-      background: #000;
-      z-index: 10;
-      pointer-events: none;
-    }
-
-    /* Täcker "Visa på karta" längst ner */
-    .mask-bottom {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 10px;
-      background: #000;
-      z-index: 10;
-      pointer-events: none;
-    }
-
-    /* Fallback-text */
-    .error {
-      position: absolute;
-      inset: 0;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      color: red;
-      font-size: 18px;
-      background: black;
-      z-index: 20;
-    }
   </style>
 </head>
 
 <body>
-  <h1 id="greeting">God morgon!</h1>
-
-  <div class="container">
-    <iframe
-      id="avganger"
-      src="https://avgång.nu/Default?name=Studieg%C3%A5ngen&county=G%C3%B6teborg&maxdist=525&provider=Vasttrafik&uniquetrips=on"
-      loading="eager">
-    </iframe>
-
-    <!-- Masker -->
-    <div class="mask-top"></div>
-    <div class="mask-bottom"></div>
-
-    <!-- Fallback -->
-    <div class="error" id="error">
-      Kan inte ladda avgångar
-    </div>
-  </div>
-
-  <script>
-    function updateGreeting() {
-      const hour = new Date().getHours();
-      const greetingEl = document.getElementById("greeting");
-
-      let greeting;
-
-      if (hour >= 5 && hour < 9) {
-        greeting = "God morgon!";
-      } else if (hour >= 9 && hour < 18) {
-        greeting = "God dag!";
-      } else if (hour >= 18 && hour < 23) {
-        greeting = "God kväll!";
-      } else {
-        greeting = "God natt!";
-      }
-
-      greetingEl.textContent = greeting;
-    }
-
-    // Sätt hälsning direkt vid laddning
-    updateGreeting();
-
-    // Automatisk refresh var 30:e sekund (utan blink)
-    setTimeout(() => {
-      location.reload();
-    }, 30000);
-
-    // Enkel felhantering om iframe blockeras
-    const iframe = document.getElementById("avganger");
-    iframe.onerror = () => {
-      document.getElementById("error").style.display = "flex";
-    };
-  </script>
+  <iframe
+    src="https://avgång.nu/Default?name=Studieg%C3%A5ngen&county=G%C3%B6teborg&maxdist=525&provider=Vasttrafik&uniquetrips=on"
+    loading="eager">
+  </iframe>
 </body>
 </html>
+
