@@ -119,25 +119,26 @@
     })();
 
     // Datum + tid
-    function updateDateTime() {
-      var now = new Date();
+function updateDateTime() {
+  var now = new Date();
 
-      var date = now.toLocaleDateString("sv-SE", {
-        weekday: "long",
-        year: "numeric",
-        month: "long",
-        day: "numeric"
-      });
+  var weekdays = ["söndag", "måndag", "tisdag", "onsdag", "torsdag", "fredag", "lördag"];
+  var months = ["januari", "februari", "mars", "april", "maj", "juni",
+                "juli", "augusti", "september", "oktober", "november", "december"];
 
-      var time = now.toLocaleTimeString("sv-SE", {
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit"
-      });
+  var date = weekdays[now.getDay()] + " " +
+             now.getDate() + " " +
+             months[now.getMonth()];
 
-      document.getElementById("datetime").textContent =
-        date.charAt(0).toUpperCase() + date.slice(1) + " – " + time;
-    }
+  var time = now.toLocaleTimeString("sv-SE", {
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit"
+  });
+
+  document.getElementById("datetime").textContent =
+    date.charAt(0).toUpperCase() + date.slice(1) + " – " + time;
+}
 
     updateDateTime();
     setInterval(updateDateTime, 1000);
