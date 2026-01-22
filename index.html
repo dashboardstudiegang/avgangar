@@ -26,6 +26,8 @@
       border-bottom: 1px solid #1c1c1c;
       font-size: 50px;
       font-weight: bold;
+      position: relative; 
+      z-index: 10; /* högre än overlayen */
     }
 
     /* Wrapper som fyller resten av skärmen */
@@ -67,7 +69,7 @@
       bottom: 0;
       left: 0;
       width: 100%;
-      height: 200px;
+      height: 150px;
       background: #000000;
       pointer-events: none;
       z-index: 2;
