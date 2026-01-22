@@ -1,75 +1,44 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hemdashboard</title>
+  <meta charset="UTF-8">
+  <title>Avgångar – Studiegången</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-    body {
-        margin: 0;
-        background: #1f2428; /* mörk dov blågrå */
-        font-family: "Segoe UI", sans-serif;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        color: #e6e6e6; /* mjukt ljusgrå text */
+  <style>
+    html, body {
+      margin: 0;
+      height: 100%;
+      width: 100%;
+      background: #000;
+      display: flex;
+      flex-direction: column;
     }
 
-    .greeting {
-        margin-top: 30px;
-        font-size: 3rem;
-        font-weight: 600;
-        color: #dcd7f5; /* dov lavendel */
-        text-shadow: 0 0 8px rgba(0,0,0,0.4);
-    }
-
-    .frame-container {
-        margin-top: 20px;
-        width: 90vw;
-        height: 50vh;
-        max-width: 1400px;
-        border-radius: 20px;
-        overflow: hidden;
-        border: 3px solid #7a8ba3; /* mjuk pastellblå */
-        box-shadow: 0 8px 25px rgba(0,0,0,0.4);
-        background: #2a3036; /* mörkare gråblå för energispar */
+    .header-text {
+      color: white;
+      text-align: center;
+      font-size: 24px;
+      padding: 10px 0;
     }
 
     iframe {
-        width: 100%;
-        height: 100%;
-        border: none;
-        background: #2a3036;
+      flex: 1;        /* Fill remaining space */
+      width: 100%;
+      border: none;
     }
-</style>
-
-<script>
-    function setGreeting() {
-        const hour = new Date().getHours();
-        let greeting = "Hej";
-
-        if (hour >= 5 && hour < 10) greeting = "God morgon";
-        else if (hour >= 10 && hour < 18) greeting = "God dag";
-        else if (hour >= 18 && hour < 22) greeting = "God kväll";
-        else greeting = "God natt";
-
-        document.getElementById("greeting").textContent = greeting;
-    }
-
-    window.onload = setGreeting;
-</script>
-
+  </style>
 </head>
+
 <body>
+  <div class="header-text">Hej Agnes</div>
 
-<div id="greeting" class="greeting"></div>
-
-<div class="frame-container">
-    <iframe 
-        src="https://avgång.nu/Default?name=Studieg%C3%A5ngen&county=G%C3%B6teborg&x=&y=&latlon=&maxdist=525&stoppoint=&route=&dest=&mode=&uniquetrips=on&refresh=30&datetime=&provider=Vasttrafik">
-    </iframe>
-</div>
-
+  <iframe
+    src="https://avgång.nu/Default?name=Studieg%C3%A5ngen&county=G%C3%B6teborg&maxdist=525&provider=Vasttrafik&uniquetrips=on"
+    loading="eager">
+  </iframe>
 </body>
 </html>
+
+
+
