@@ -22,34 +22,62 @@
       display: flex;
       -webkit-flex-direction: column;
       flex-direction: column;
-      background: #0d0d0d;
     }
 
     /* Header */
     .header {
-      padding: 18px 12px;
+      padding: 14px 12px 10px;
       text-align: center;
-      background: linear-gradient(to bottom, #141414, #0d0d0d);
+      background: #0d0d0d;
       border-bottom: 1px solid #1c1c1c;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
     }
 
     .greeting {
-      font-size: 28px;
+      font-size: 24px;
       font-weight: bold;
-      letter-spacing: 0.5px;
-      color: #f2f2f2;
-      text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+      letter-spacing: 0.4px;
     }
 
-    /* Content */
-    iframe {
+    /* Container for iframe + overlay + datetime */
+    .iframe-wrapper {
+      position: relative;
       -webkit-box-flex: 1;
       -webkit-flex: 1;
       flex: 1;
       width: 100%;
+      overflow: hidden;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
       border: none;
       background: #000;
+    }
+
+    /* Overlay to hide top rows of iframe */
+    .iframe-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 70px;
+      background: #0d0d0d;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Datum/tid ovanpå overlayen */
+    .datetime-overlay {
+      position: absolute;
+      top: 10px;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      font-size: 40px;
+      color: #f2f2f2;
+      z-index: 2;
+      pointer-events: none;
     }
   </style>
 </head>
@@ -60,27 +88,52 @@
     <div class="greeting" id="greeting">Hej</div>
   </div>
 
-  <iframe
-    src="https://avgång.nu/Default?name=Studieg%C3%A5ngen&county=G%C3%B6teborg&maxdist=525&provider=Vasttrafik&uniquetrips=on">
-  </iframe>
+  <div class="iframe-wrapper">
+    <iframe
+      src="https://avgång.nu/Default?name=Studieg%C3%A5ngen&county=G%C3%B6teborg&maxdist=525&provider=Vasttrafik&uniquetrips=on">
+    </iframe>
+
+    <div class="iframe-overlay"></div>
+    <div class="datetime-overlay" id="datetime">Laddar tid…</div>
+  </div>
 
   <script>
+    // Hälsning
     (function () {
       var hour = new Date().getHours();
       var greeting;
 
-      if (hour >= 5 && hour < 10) {
-        greeting = "God morgon";
-      } else if (hour >= 10 && hour < 18) {
-        greeting = "Hej";
-      } else if (hour >= 18 && hour < 23) {
-        greeting = "God kväll";
-      } else {
-        greeting = "God natt";
-      }
+      if (hour >= 5 && hour < 10) greeting = "God morgon";
+      else if (hour >= 10 && hour < 18) greeting = "Hej";
+      else if (hour >= 18 && hour < 23) greeting = "God kväll";
+      else greeting = "God natt";
 
       document.getElementById("greeting").textContent = greeting;
     })();
+
+    // Datum + tid
+    function updateDateTime() {
+      var now = new Date();
+
+      var date = now.toLocaleDateString("sv-SE", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+      });
+
+      var time = now.toLocaleTimeString("sv-SE", {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit"
+      });
+
+      document.getElementById("datetime").textContent =
+        date.charAt(0).toUpperCase() + date.slice(1) + " – " + time;
+    }
+
+    updateDateTime();
+    setInterval(updateDateTime, 1000);
   </script>
 
 </body>
